@@ -1,9 +1,15 @@
 version: "3.9"
 
+networks:
+  redis_net:
+    driver: bridge
+
 services:
   redis:
     image: redis:7.2-alpine
     container_name: redis_movies
+    networks:
+      - redis_net
     ports:
       - "6379:6379"
     volumes:
@@ -23,6 +29,8 @@ services:
   importer:
     image: python:3.12-slim
     container_name: redis_importer
+    networks:
+      - redis_net
     depends_on:
       redis:
         condition: service_healthy
@@ -39,6 +47,25 @@ services:
         python import_data.py
       "
 
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redis_insight
+    networks:
+      - redis_net
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsight_data:/data
+    environment:
+      RI_REDIS_HOST: redis
+      RI_REDIS_PORT: 6379
+      RI_REDIS_ALIAS: redis_movies
+    depends_on:
+      redis:
+        condition: service_healthy
+
 volumes:
   redis_data:
+    driver: local
+  redisinsight_data:
     driver: local
