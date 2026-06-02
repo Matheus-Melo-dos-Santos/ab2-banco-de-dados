@@ -34,16 +34,17 @@ docker compose up
 ```
 
 O `importer` irá:
-1. Aguardar o Redis ficar saudável
+1. Aguarda verificação da inicialização correta do container
 2. Executar `import_data.py` → carrega filmes e avaliações
-3. Executar `demo_commands.py` → exibe todos os conceitos DDL/DML
 
 ### 3. Explorar manualmente via redis-cli
 
 ```bash
 # conectar ao Redis em execução
 docker exec -it redis_movies redis-cli
+```
 
+```
 # ver todas as chaves (cuidado em prod)
 KEYS *
 
@@ -60,14 +61,7 @@ ZREVRANGE top_rated 0 4 WITHSCORES
 ZRANGE movie:1:ratings 0 -1 WITHSCORES
 ```
 
-### 4. Re-executar apenas a demo (sem reimportar)
-
-```bash
-docker compose run --rm importer \
-  sh -c "pip install redis -q && python demo_commands.py"
-```
-
-### 5. Parar e remover volumes
+### 4. Parar e remover volumes
 
 ```bash
 docker compose down -v   # -v remove o volume redis_data
