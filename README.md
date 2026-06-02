@@ -45,7 +45,7 @@ docker exec -it redis_movies redis-cli
 ```
 
 ```
-# ver todas as chaves (cuidado em prod)
+# ver todas as chaves
 KEYS *
 
 # detalhes de um filme
