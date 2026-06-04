@@ -61,10 +61,14 @@ ZREVRANGE top_rated 0 4 WITHSCORES
 ZRANGE movie:1:ratings 0 -1 WITHSCORES
 ```
 
-### 4. Parar e remover volumes
+### 4. Visualização web (localhost)
+
+http://localhost:5540/
+
+### 5. Parar e remover volumes
 
 ```bash
-docker compose down -v   # -v remove o volume redis_data
+docker compose down -v  
 ```
 
 ---
