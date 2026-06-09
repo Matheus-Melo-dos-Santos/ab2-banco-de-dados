@@ -65,16 +65,15 @@ Cada valor corresponde ao ID de um filme.
 
 Os filmes são classificados em um Sorted Set.
 
-Chave:
-
-```text
-movies:ranking
-```
-
-Exemplo:
+Geral:
 
 ```redis
-ZREVRANGE movies:ranking 0 4 WITHSCORES
+ZREVRANGE top_rated 0 4 WITHSCORES
+```
+
+Para um gênero particular
+```redis
+ZREVRANGE genre:Action:ranking 0 4 WITHSCORES
 ```
 
 ---
