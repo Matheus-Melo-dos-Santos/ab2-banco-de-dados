@@ -101,7 +101,6 @@ docker compose down -v
 | `movie:<id>`               | Hash        | title, genres                         |
 | `genre:<nome>`             | Set         | movieIds nesse gênero                 |
 | `rating:<uid>:<mid>`       | Hash        | rating, timestamp                     |
-| `movie:<id>:ratings`       | Sorted Set  | score = rating, member = userId       |
 | `top_rated`                | Sorted Set  | score = avg_rating, member = movieId  |
 | `stats:total_movies`       | String      | contagem total                        |
 | `stats:total_ratings`      | String      | contagem total                        |
